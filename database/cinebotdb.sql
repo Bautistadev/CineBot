@@ -24,9 +24,9 @@ CREATE SCHEMA IF NOT EXISTS `cinebotdb` DEFAULT CHARACTER SET utf8 ;
 USE `cinebotdb` ;
 
 -- -----------------------------------------------------
--- Tabla `cinebotdb`.`Persona`
+-- Tabla `cinebotdb`.`Usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cinebotdb`.`Persona` (
+CREATE TABLE IF NOT EXISTS `cinebotdb`.`Usuario` (
   `id` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `apellido` VARCHAR(45) NOT NULL,
@@ -105,21 +105,21 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Tabla `cinebotdb`.`GeneroXPersona`
+-- Tabla `cinebotdb`.`GeneroXUsuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cinebotdb`.`GeneroXPersona` (
+CREATE TABLE IF NOT EXISTS `cinebotdb`.`GeneroXUsuario` (
   `id` INT NOT NULL,
-  `Persona_id` INT NOT NULL,
+  `Usuario_id` INT NOT NULL,
   `Genero_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_GeneroXPersona_Persona_idx` (`Persona_id` ASC) VISIBLE,
-  INDEX `fk_GeneroXPersona_Genero1_idx` (`Genero_id` ASC) VISIBLE,
-  CONSTRAINT `fk_GeneroXPersona_Persona`
-    FOREIGN KEY (`Persona_id`)
-    REFERENCES `cinebotdb`.`Persona` (`id`)
+  INDEX `fk_GeneroXUsuario_Usuario_idx` (`Usuario_id` ASC) VISIBLE,
+  INDEX `fk_GeneroXUsuario_Genero1_idx` (`Genero_id` ASC) VISIBLE,
+  CONSTRAINT `fk_GeneroXUsuario_Usuario`
+    FOREIGN KEY (`Usuario_id`)
+    REFERENCES `cinebotdb`.`Usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_GeneroXPersona_Genero1`
+  CONSTRAINT `fk_GeneroXUsuario_Genero1`
     FOREIGN KEY (`Genero_id`)
     REFERENCES `cinebotdb`.`Genero` (`id`)
     ON DELETE NO ACTION
