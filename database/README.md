@@ -17,8 +17,9 @@ Esta tabla almacena la información básica de los usuarios del bot notificador.
 | `id`            | INT               | Identificador único del usuario.     |
 | `nombre`        | VARCHAR(45)       | Nombre del usuario.                  |
 | `apellido`      | VARCHAR(45)       | Nombre del usuario.                  |
-| `email`         | VARCHAR(150)      | Correo electrónico del usuario.      |
-| `fecha_registro`| DATE              | Fecha en que el usuario se registró. |
+| `email`         | VARCHAR(50)       | Correo electrónico del usuario.      |
+| `password`      | VARCHAR(50)       | Contraseña del usuario               |
+| `telefono`      | VARCHAR(50)       | Numero de telefono.                  |
 
 ### 2. `Genero`
 
