@@ -1,6 +1,3 @@
-// "@/components/ui/button.jsx"
-import React from "react";
-
 export const Button = ({ children, variant = "default", size = "md", ...props }) => {
   const baseStyles = "inline-flex items-center justify-center rounded-md font-medium focus:outline-none";
   const sizeStyles = {
