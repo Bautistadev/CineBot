@@ -9,7 +9,7 @@ const ChatPage = () => {
   useEffect(() => {
     setMessages([
       {
-        text: 'Hola! Actualmente estoy en construcción. Puedes utilizar el comando "peliculas" para obtener algunas recomendaciones.',
+        text: 'Hola! Actualmente estoy en construcción.\n\n Puedes utilizar el comando "estrenos" para obtener algunas recomendaciones.',
         sender: 'bot',
       },
     ]);
@@ -21,7 +21,7 @@ const ChatPage = () => {
       setMessages(newMessages);
 
       // Verificar si el usuario escribe la palabra "funciones"
-      if (inputValue.trim().toLowerCase() === 'funciones') {
+      if (inputValue.trim().toLowerCase() === 'estrenos') {
         setMessages([
           ...newMessages,
           {
@@ -45,7 +45,7 @@ const ChatPage = () => {
 
   return (
     <>
-      <section className="w-full py-12 bg-gray-800 dark:bg-gray-800">
+      <section className="w-full bg-gray-800 dark:bg-gray-800">
         <div className="flex justify-center items-center min-h-screen">
           <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
             <div className="space-y-3">
