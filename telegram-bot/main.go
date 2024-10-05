@@ -27,12 +27,11 @@ func main() {
 }
 
 func handler(ctx context.Context, b *bot.Bot, update *models.Update) {
-	phoneNumber := "numero-no-registrado"
-	if update.Message.Contact != nil {
-		phoneNumber = update.Message.Contact.PhoneNumber
-	}
 	b.SendMessage(ctx, &bot.SendMessageParams{
 		ChatID: update.Message.Chat.ID,
-		Text:   "Hello world, " + phoneNumber + ". " + update.Message.Text,
+		Text: `Hola, que le gustaria hacer?
+		1- Ver cartelera
+		2- Ver proximos estrenos
+		3- Suscribirse a notificaciones de estrenos`,
 	})
 }
