@@ -4,7 +4,7 @@ export const SectionB = () => {
     return(
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-800 dark:bg-gray-800">
           <div className=" px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">CinemaBot te brinda</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">CineBot te brinda</h2>
             <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
               <div className="flex flex-col items-center space-y-3 text-center">
                 <MessageCircle className="h-12 w-12 text-primary" />
@@ -19,7 +19,7 @@ export const SectionB = () => {
               <div className="flex flex-col items-center space-y-3 text-center">
                 <Ticket className="h-12 w-12 text-primary" />
                 <h3 className="text-xl font-bold">Personalizacion</h3>
-                <p className="text-gray-500 dark:text-gray-400">Cinemabot conoce tus gustos, esto mejora las recomendaciones.</p>
+                <p className="text-gray-500 dark:text-gray-400">Cinebot conoce tus gustos, esto mejora las recomendaciones.</p>
               </div>
               <div className="flex flex-col items-center space-y-3 text-center">
                 <Ticket className="h-12 w-12 text-primary" />

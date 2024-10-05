@@ -9,7 +9,7 @@ export const SectionA = () => {
                     <div className="space-y-2">
                     <Image src='/images/cinema-bot-logo.png' className="mx-auto" width={220} height={220}/>
                     <h1 className="text-3xl font-bold text-black tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                        CinemaBot
+                        CineBot
                     </h1>
                     <p className="mx-auto max-w-[700px] text-slate-950 md:text-xl dark:text-slate-950">
                         Tu asistente personal para no perderte ningun estreno.
@@ -21,7 +21,7 @@ export const SectionA = () => {
                     <div className="space-x-4">
                     <Button>Chatear</Button>
                     </div>
-            </div>
+                </div>
             </div>
         </section>
     )
