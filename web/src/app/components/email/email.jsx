@@ -1,19 +1,18 @@
 import {
   Body,
   Button,
+  Column,
   Container,
   Head,
   Heading,
-  Column,
   Html,
   Img,
   Link,
   Preview,
+  Row,
   Section,
   Text,
-  Row,
 } from "@react-email/components";
-import * as React from "react";
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -22,7 +21,7 @@ const baseUrl = process.env.VERCEL_URL
 export const CodepenChallengersEmail = () => (
   <Html>
     <Head />
-    <Preview>#CodePenChallenge: Cubes</Preview>
+    <Preview>Cinebot te recomienda:Spiderman no way home</Preview>
     <Body style={main}>
       <Section style={header}>
         <Img
@@ -34,19 +33,18 @@ export const CodepenChallengersEmail = () => (
       </Section>
       <Container style={container}>
         <Text style={challengeLink}>
-          <Link style={link}>View this Challenge on CodePen</Link>
+          <Link style={link}>Hola! Espero que tengas ganas de ver algo</Link>
         </Text>
 
         <Heading style={heading}>
-          <strong>This week:</strong> #CodePenChallenge:{" "}
-          <Text style={cubeText}>Cubes</Text>
+          <strong>Cinebot:</strong> Estrenos:{" "}
         </Heading>
 
         <Section style={section}>
           <Text style={text}>The Shape challenge continues!</Text>
 
           <Text style={text}>
-            Last week, we kicked things off with round shapes. We "rounded" up
+            Last week, we kicked things off with round shapes. We &quot;rounded&quot; up
             the Pens from week one in our{" "}
             <Link style={blueLink}>#CodePenChallenge: Round</Link> collection.
           </Text>
@@ -65,8 +63,8 @@ export const CodepenChallengersEmail = () => (
           </Text>
 
           <Text style={text}>
-            This week's starter template features an ice cube emoji to help
-            inspire a "cool" idea for your Pen. As always, the template is just
+            This weeks starter template features an ice cube emoji to help
+            inspire a &quot;cool&quot; idea for your Pen. As always, the template is just
             as jumping off point. Feel free to incorporate the 🧊 in your
             creation, add more elements, or freeze it out completely and start
             over from scratch!
@@ -116,7 +114,7 @@ export const CodepenChallengersEmail = () => (
             {" "}
             <strong>cpc-cubes</strong>
           </Link>
-          . We'll be watching and gathering the Pens into a Collection, and
+          . We ll be watching and gathering the Pens into a Collection, and
           sharing on <Link style={blueLink}>Twitter</Link> and{" "}
           <Link style={blueLink}>Instagram</Link> (Use the #CodePenChallenge tag
           on Twitter and Instagram as well).
@@ -141,10 +139,10 @@ export const CodepenChallengersEmail = () => (
               <Section style={yellowCard}>
                 🌟
                 <Text style={textCard}>
-                  There's more to cubes than just six square sides. There are
+                  There s more to cubes than just six square sides. There are
                   variations on the cube that could be fun to play with this
                   week: <Link style={blueLink}>cuboid shapes</Link> are
-                  hexahedrons with faces that aren't always squares. And if you
+                  hexahedrons with faces that aren&quot;t always squares. And if you
                   want to really push the boundaries of shape, consider the 4
                   dimensional <Link style={blueLink}>tesseract!</Link>
                 </Text>
@@ -153,8 +151,8 @@ export const CodepenChallengersEmail = () => (
               <Section style={yellowCard}>
                 🌟
                 <Text style={textCard}>
-                  Here's a mind-bending idea that can combine the round shapes
-                  from week one with this week's cube theme:{" "}
+                  Here s a mind-bending idea that can combine the round shapes
+                  from week one with this week s cube theme:{" "}
                   <Link style={blueLink}>Spherical Cubes</Link> 😳 Solving
                   longstanding mathematical mysteries is probably outside the
                   scope of a CodePen challenge, but you could use front-end
@@ -170,7 +168,7 @@ export const CodepenChallengersEmail = () => (
                 <Text style={textCard}>
                   Learn all about{" "}
                   <Link style={blueLink}>How CSS Perspective Works</Link> and
-                  how to build a 3D CSS cube from scratch in Amit Sheen's
+                  how to build a 3D CSS cube from scratch in Amit Sheen&quot;s
                   in-depth tutorial for CSS-Tricks. Or, check out stunning
                   examples of WebGL cubes from Matthias Hurrle:{" "}
                   <Link style={blueLink}>Just Ice</Link> and{" "}
@@ -182,10 +180,10 @@ export const CodepenChallengersEmail = () => (
                 📖
                 <Text style={textCard}>
                   Want to go beyond the square cube? Draw inspiration from
-                  EntropyReversed's{" "}
-                  <Link style={blueLink}>Pulsating Tesseract</Link>, Josetxu's{" "}
+                  EntropyReversed&quot;s{" "}
+                  <Link style={blueLink}>Pulsating Tesseract</Link>, Josetxu s{" "}
                   <Link style={blueLink}>Rainbow Cuboid Loader</Link>, or Ana
-                  Tudor's{" "}
+                  Tudor&quot;s{" "}
                   <Link style={blueLink}>Pure CSS cuboid jellyfish</Link>.
                 </Text>
               </Section>
@@ -194,12 +192,12 @@ export const CodepenChallengersEmail = () => (
                 📖
                 <Text style={textCard}>
                   Did that spherical cubes concept pique your interest? Explore
-                  Ryan Mulligan's <Link style={blueLink}>Cube Sphere</Link>,
-                  Munir Safi's{" "}
+                  Ryan Mulligan s <Link style={blueLink}>Cube Sphere</Link>,
+                  Munir Safi s{" "}
                   <Link style={blueLink}>
                     3D Sphere to Cube Animation With Virtual Trackball
                   </Link>{" "}
-                  and Ana Tudor's{" "}
+                  and Ana Tudor s{" "}
                   <Link style={blueLink}>Infinitely unpack prism</Link> for more
                   mindbending cube concepts that test the boundaries of how
                   shapes interact with each other.
