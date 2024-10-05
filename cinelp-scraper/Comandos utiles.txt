@@ -1,0 +1,3 @@
+Para ejecutar todos estos comandos hay que hacer cd a este directorio
+scrapy genspider (nombre spider) (url a scrapear)
+scrapy crawl (nombre spider) --output (nombre archivo).json
