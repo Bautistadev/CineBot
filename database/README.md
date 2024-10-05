@@ -81,3 +81,5 @@ La tabla `Cine` almacena la información de los cines que participan en el siste
 - **Cine** puede tener múltiples entradas en la tabla **Cartelera**, indicando qué películas se proyectan en ese cine.
 
 ## Diagrama Relacional
+
+![DB](https://github.com/user-attachments/assets/35bea6e6-10fa-4d61-ade3-e692c4a08ad8)
