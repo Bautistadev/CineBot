@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { Button } from "../button"
+import Link from "next/link"
 
 export const SectionA = () => {
     return(
@@ -19,7 +20,9 @@ export const SectionA = () => {
                     </p>
                     </div>
                     <div className="space-x-4">
-                    <Button>Chatear</Button>
+                    <Link href="/chat">
+                        <Button>Chatear</Button>
+                    </Link>
                     </div>
                 </div>
             </div>
