@@ -6,6 +6,7 @@ import (
 
 type Config struct {
 	TelegramBotToken string `env:"TELEGRAM_BOT_TOKEN"`
+	BackendURL       string `env:"BACKEND_URL"`
 }
 
 var cfg *Config
