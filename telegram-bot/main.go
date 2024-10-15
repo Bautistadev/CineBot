@@ -109,6 +109,7 @@ func getUserState(ctx context.Context, b *bot.Bot, update *models.Update) string
 	if state, exists := userState[update.Message.Chat.ID]; exists {
 		if update.Message.Text == "1" || update.Message.Text == "2" || update.Message.Text == "3" || update.Message.Text == "4" {
 			userState[update.Message.Chat.ID] = update.Message.Text
+			return update.Message.Text
 		} // if user chooses a number option, change state, else, user is giving input for the option chosen before
 		return state
 	}
