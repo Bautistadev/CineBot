@@ -85,7 +85,6 @@ CREATE TABLE IF NOT EXISTS `cinebotdb`.`Cartelera` (
   `id` INT NOT NULL,
   `fecha` DATE NOT NULL,
   `hora` TIME NOT NULL,
-  `Carteleracol` VARCHAR(45) NOT NULL,
   `Pelicula_id` INT NOT NULL,
   `Cine_id` INT NOT NULL,
   PRIMARY KEY (`id`),
