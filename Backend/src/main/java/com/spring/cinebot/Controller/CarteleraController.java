@@ -31,16 +31,16 @@ public class CarteleraController {
                 .body(this.carteleraService.findAllNext());
     }
 
-    @GetMapping("/Cartelera/movies-by-gender/{genderId}")
-    public ResponseEntity<List<CarteleraDTO>> getCarteleraByGender(@PathVariable("genderId") Integer genderId) {
+    @GetMapping("/Cartelera/movies-by-genre/")
+    public ResponseEntity<List<CarteleraDTO>> getCarteleraByGender(@RequestParam("genreId") Integer genreId) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(this.carteleraService.findByGender(genderId));
+                .body(this.carteleraService.findByGender(genreId));
     }
 
-    @GetMapping("/Cartelera/movies-by-name/{name}")
-    public ResponseEntity<List<CarteleraDTO>> getCarteleraByName(@PathVariable("name") String name) {
+    @GetMapping("/Cartelera/movies-by-name/")
+    public ResponseEntity<List<CarteleraDTO>> getCarteleraByName(@RequestParam("movies_name") String name) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
