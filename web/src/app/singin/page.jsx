@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { Button } from "../components/button"
-import Link from "next/link"
 
 function Page() {
   // Estado inicial con los campos del UsuarioDTO
@@ -29,7 +28,7 @@ function Page() {
 
     try {
       // Solicitud POST al endpoint del backend
-      const response = await fetch('', {
+      const response = await fetch('../', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,25 +49,25 @@ function Page() {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '0 auto', padding: '2rem' }}>
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nombre:</label>
-          <input
-                  type="text"
-                  name="nombre"
-                  placeholder="Escribe un mensaje..."
-                  className="w-full p-3 border border-gray-300 rounded-md focus:outline-none text-gray-700 focus:ring-2 focus:ring-blue-500"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  required
-                />
-          
-        </div>
-        <div>
-          <label>Apellido:</label>
-          <input
+    <section className="w-full py-10 md:py-16 bg-gray-200 dark:bg-gray-200">
+      <div style={{ maxWidth: '400px', margin: '0 auto', padding: '2rem' }}>
+        <h2 className="text-black">Iniciar Sesión</h2>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label className="text-black">Nombre:</label>
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Escribe un mensaje..."
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none text-gray-700 focus:ring-2 focus:ring-blue-500"
+              value={formData.nombre}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label className="text-black">Apellido:</label>
+            <input
               type="text"
               name="apellido"
               placeholder="Escribe tu apellido..."
@@ -77,10 +76,10 @@ function Page() {
               onChange={handleChange}
               required
             />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
+          </div>
+          <div>
+            <label className="text-black">Email:</label>
+            <input
               type="email"
               name="email"
               placeholder="Escribe tu email..."
@@ -89,10 +88,10 @@ function Page() {
               onChange={handleChange}
               required
             />
-        </div>
-        <div>
-          <label>Contraseña:</label>
-          <input
+          </div>
+          <div>
+            <label className="text-black">Contraseña:</label>
+            <input
               type="password"
               name="password"
               placeholder="Escribe tu contraseña..."
@@ -101,10 +100,10 @@ function Page() {
               onChange={handleChange}
               required
             />
-        </div>
-        <div>
-          <label>Teléfono:</label>
-          <input
+          </div>
+          <div>
+            <label className="text-black">Teléfono:</label>
+            <input
               type="tel"
               name="telefono"
               placeholder="Escribe tu teléfono..."
@@ -113,12 +112,14 @@ function Page() {
               onChange={handleChange}
               required
             />
-        </div>
-        <div className="space-x-4">
-                        <Button>Inicio de sesion</Button>
-                    </div>
-      </form>
-    </div>
+          </div>
+          <div className="space-x-4">
+            <Button>Inicio de sesión</Button>
+          </div>
+        </form>
+      </div>
+    </section>
+
   );
 }
 

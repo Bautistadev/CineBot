@@ -15,7 +15,7 @@ export const Navbar = () => {
                 <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
                     Nosotros
                 </Link>
-                <Link className="text-sm font-medium hover:underline underline-offset-4" href="/login">
+                <Link className="text-sm font-medium hover:underline underline-offset-4" href="/singin">
                     Login
                 </Link>
              </nav>
