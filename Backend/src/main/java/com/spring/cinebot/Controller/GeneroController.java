@@ -18,8 +18,8 @@ public class GeneroController {
         this.generoService = generoService;
     }
 
-    @GetMapping("/Genero/suscribe/{userId}/{genderId}")
-    public ResponseEntity suscribe(@PathVariable("userId") Integer userId, @PathVariable("genderId") Integer genderId){
+     @GetMapping("/Genero/suscribe/")
+    public ResponseEntity suscribe(@RequestParam("userId") Integer userId, @RequestParam("genderId") Integer genderId){
         this.generoService.genderSuscribe(userId,genderId);
 
         return ResponseEntity.status(HttpStatus.OK).build();
