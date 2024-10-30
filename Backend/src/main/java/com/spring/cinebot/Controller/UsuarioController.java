@@ -1,18 +1,17 @@
 package com.spring.cinebot.Controller;
 
 import com.spring.cinebot.DTO.UsuarioDTO;
+import com.spring.cinebot.DTO.UsuarioRequestDTO;
 import com.spring.cinebot.Service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/cineBot/")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UsuarioController {
 
     private UsuarioService usuarioService;
@@ -34,8 +33,19 @@ public class UsuarioController {
 
     @GetMapping("/Usuario/findByEmail")
     public ResponseEntity<UsuarioDTO> findByEmail(@RequestParam("email") String email){
+        System.out.println("entra");
         return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.findByEmail(email));
     }
+
+
+    @PostMapping("/Usuario/save")
+    public ResponseEntity save(@RequestBody UsuarioRequestDTO param){
+        System.out.println(param);
+        this.usuarioService.save(param);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+
 
 
 }
