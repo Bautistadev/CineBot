@@ -23,6 +23,11 @@ public class Genero {
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "generoxusuario",
+            joinColumns = @JoinColumn(name = "Usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "Genero_id")
+    )
     private List<Usuario> usuariosSuscritos;
 
     @JsonIgnore
