@@ -41,9 +41,6 @@ public class CarteleraService implements CarteleraServiceContract {
 
     @Override
     public List<CarteleraDTO> findAllNext() {
-        if(carteleraRepository.findAll().isEmpty())
-            throw new NotContentException("NO EXISTE CONTENIDO PERSISTIDO");
-
         return this.carteleraRepository.findAll()
                 .stream()
                 .filter(o -> o.getFecha().isAfter(LocalDate.now()))
@@ -71,7 +68,7 @@ public class CarteleraService implements CarteleraServiceContract {
 
         return this.carteleraRepository.findAll()
                 .stream()
-                .filter(o -> o.getPelicula().getGenero().getNombre().equalsIgnoreCase(name))
+                .filter(o -> o.getPelicula().getNombre().contains(name))
                 .map(carteleraMapper::carteleraTOCarteleraDTO)
                 .collect(Collectors.toList());
     }
