@@ -1,37 +1,84 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { getMovies } from '../lib/api/cartelera';
+import { getMovies, getMoviesByGenre, getMoviesByName } from '../lib/api/cartelera';
 
 const ChatPage = () => {
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [isStartMenu, setIsStartMenu] = useState(true)
+  const [isSelectingGender, setIsSelectingGender] = useState(false)
+  const [isSelectingName, setIsSelectingName] = useState(false)
+
+  const menuText = 'Que le gustaria hacer?\n' +
+  '1. Ver cartelera\n' +
+  '2. Ver peliculas por genero\n' +
+  '3. Ver peliculas por titulo\n' +
+  '4. Nada';
 
   useEffect(() => {
     setMessages([
       {
-        text: 'Hola! Actualmente estoy en construcción.\n\n Puedes utilizar el comando "estrenos" para obtener algunas recomendaciones.',
+        text: 'Hola! bienvenido a CineBot.',
+        sender: 'bot',
+      },
+      {
+        text: menuText,
         sender: 'bot',
       },
     ]);
   }, []);
 
-  const fetchCartelera = async () => {
+  const carteleraOption = async (newMessages) => {
+    setIsStartMenu(false)
     const data = await getMovies()
-    return data;
+    const text = "---------ESTRENOS---------\n" + data.map((item) => {
+      return `Pelicula: ${item.pelicula.nombre}\n` +
+             `Cine: ${item.cine.nombre}\n` +
+             `Fecha: ${item.fecha}\n` +
+             `Hora: ${item.hora}\n` +
+             `Director: ${item.pelicula.director}\n` +
+             `Duracion: ${item.pelicula.duracion} min\n` +
+             `Genero: ${item.pelicula.genero.nombre}\n` +
+             '----------------------------------\n';
+    });
+    setMessages([
+      ...newMessages,
+      {
+        text: text,
+        sender: 'bot',
+      },
+    ]);
   }
 
-  const handleSendMessage = async () => {
-    if (inputValue.trim()) {
-      const newMessages = [...messages, { text: inputValue, sender: 'user' }];
-      setMessages(newMessages);
+  const genderOption = async (newMessages) => {
+    setIsSelectingGender(true)
+    setIsStartMenu(false)
+    const message = 'De que genero desea ver?\n' +
+                    '1. Accion\n' +
+                    '2. Emocion\n' +
+                    '3. Terror\n' +
+                    '4. Drama\n' +
+                    '5. Comedia';
+    setMessages([
+      ...newMessages,
+      {
+        text: message,
+        sender: 'bot',
+      },
+    ]);
+  }
 
-      // Verificar si el usuario escribe la palabra "funciones"
-      if (inputValue.trim().toLowerCase() === 'estrenos') {
-        const data = await fetchCartelera()
-        console.log("DATA")
-        console.log(data)
-        const text = "---------ESTRENOS---------\n" + data.map((item) => {
+  const selectGenderOption = async (newMessages, gender) => {
+    setIsSelectingGender(false)
+    setIsStartMenu(false)
+    let text
+    try{
+      const data = await getMoviesByGenre(Number(gender))
+      if(data.length == 0){
+        text = "No hay funciones para esa pelicula :/"
+      }else{
+        text = "---------PELICULAS---------\n" + data.map((item) => {
           return `Pelicula: ${item.pelicula.nombre}\n` +
                  `Cine: ${item.cine.nombre}\n` +
                  `Fecha: ${item.fecha}\n` +
@@ -41,15 +88,124 @@ const ChatPage = () => {
                  `Genero: ${item.pelicula.genero.nombre}\n` +
                  '----------------------------------\n';
         });
-        setMessages([
-          ...newMessages,
-          {
-            text: text,
-            sender: 'bot',
-          },
-        ]);
       }
 
+    }catch(err){
+      text = 'Ocurrio un error al consultar el genero :('
+    }
+    setMessages([
+      ...newMessages,
+      {
+        text: text,
+        sender: 'bot',
+      },
+    ]);
+  }
+
+  const movieByNameOption = async (newMessages) => {
+    setIsSelectingName(true)
+    const message = 'Ingrese el nombre de la pelicula' 
+    setMessages([
+      ...newMessages,
+      {
+        text: message,
+        sender: 'bot',
+      },
+    ]);
+  }
+
+  const selectByNameOption = async (newMessages, name) => {
+    setIsSelectingName(false)
+    setIsStartMenu(false)
+    let text
+    try{
+      const data = await getMoviesByName(name.toUpperCase())
+      if(data.length == 0){
+        text = "No hay funciones para esa pelicula :/"
+      }else{
+        text = "---------FUNCIONES---------\n" + data.map((item) => {
+          return `Pelicula: ${item.pelicula.nombre}\n` +
+                 `Cine: ${item.cine.nombre}\n` +
+                 `Fecha: ${item.fecha}\n` +
+                 `Hora: ${item.hora}\n` +
+                 `Director: ${item.pelicula.director}\n` +
+                 `Duracion: ${item.pelicula.duracion} min\n` +
+                 `Genero: ${item.pelicula.genero.nombre}\n` +
+                 '----------------------------------\n';
+        });
+      }
+
+    }catch(err){
+      text = 'No se encontro la pelicula'
+    }
+    setMessages([
+      ...newMessages,
+      {
+        text: text,
+        sender: 'bot',
+      },
+    ]);
+  }
+
+  const defaultOption = async (newMessages) => {
+    setMessages([
+      ...newMessages,
+      {
+        text: menuText,
+        sender: 'bot',
+      },
+    ]);
+  }
+
+  const exitOption = async (newMessages) => {
+    const text = "Oki! Vuelva pronto :)"
+    setMessages([
+      ...newMessages,
+      {
+        text: text,
+        sender: 'bot',
+      },
+    ]);
+  }
+
+  const handleSendMessage = async () => {
+    if (inputValue.trim()) {
+      const newMessages = [...messages, { text: inputValue, sender: 'user' }];
+      setMessages(newMessages);
+      if(isSelectingGender){
+        await selectGenderOption(newMessages, inputValue)
+        setInputValue('');
+        return
+      }
+      if(isSelectingName){
+        await selectByNameOption(newMessages, inputValue)
+        setInputValue('');
+        return
+      }
+
+      if (inputValue.trim().toLowerCase() === '1' && isStartMenu) {
+        await carteleraOption(newMessages)
+        setInputValue('');
+        return
+      }
+      if (inputValue.trim().toLowerCase() === '2' && isStartMenu) {
+        genderOption(newMessages)
+        setInputValue('');
+        return
+      }
+      if (inputValue.trim().toLowerCase() === '3' && isStartMenu) {
+        movieByNameOption(newMessages)
+        setInputValue('');
+        return
+      }
+      if(inputValue.trim().toLowerCase() === '4' && isStartMenu){
+        setInputValue('');
+        setIsStartMenu(false)
+        exitOption(newMessages)
+        return
+      }
+      defaultOption(newMessages)
+      setIsStartMenu(true)
       setInputValue('');
     }
   };
@@ -66,7 +222,7 @@ const ChatPage = () => {
     <>
       <section className="w-full bg-gray-800 dark:bg-gray-800">
         <div className="flex justify-center items-center min-h-screen">
-          <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6">
             <div className="space-y-3">
               <h2 className="text-3xl text-gray-700 font-bold text-center mb-6">CineBot</h2>
               <div className="border p-4 h-80 overflow-y-scroll bg-gray-100 rounded-md">
