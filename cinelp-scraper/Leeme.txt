@@ -1,0 +1,46 @@
+En este documento se explica detalladamente cómo instalar y ejecutar el proyecto para obtener toda la información sobre las películas de Cinema La Plata.
+
+1. Instalación de Google Chrome:
+
+Para llevar a cabo el proceso de scraping en el sitio de Cinema La Plata, es necesario instalar la última versión de Google Chrome, ya que este navegador será utilizado para realizar el crawling. La elección de Google Chrome es fundamental, pues se requieren interacciones con la página web que implican la ejecución de JavaScript, como hacer clic en botones, para acceder a la información. Este proyecto usa Chromedriver, un ejecutable que permite automatizar tareas en Google Chrome.
+
+
+2. Instalación de Librerías con pip:
+
+Este proyecto depende de varias librerías de Python, las cuales se deben instalar a través de pip. Para instalar todas las librerías necesarias, ejecuta el siguiente comando en la terminal:
+	pip install scrapy-selenium selenium scrapy webdriver-manager
+
+Este comando instalará scrapy-selenium para realizar el scraping usando Selenium, selenium como el motor de control de Chrome, scrapy como el framework de scraping, y webdriver-manager para gestionar la descarga y actualización de Chromedriver automáticamente.
+
+
+3. Reemplazo del archivo middlewares.py:
+
+Para que el proyecto funcione correctamente, es necesario reemplazar el archivo middlewares.py que viene con scrapy-selenium por una versión modificada que se encuentra en el directorio de este manual. Este archivo personalizado contiene modificaciones necesarias para el funcionamiento específico de este proyecto.
+Para encontrar la ubicación del archivo middlewares.py que tenes que reemplazar, ejecutá el siguiente comando en la terminal:
+	pip show scrapy-selenium
+Este comando te va a indicar el directorio en el que está instalado scrapy-selenium. Navegá hasta esa ubicación y reemplazá el archivo middlewares.py con el que se incluye en este manual.
+
+
+4. Descripción de los Spiders del Proyecto:
+
+Una vez completados los pasos anteriores, el proyecto estará listo para comenzar el scraping. Este proyecto contiene tres spiders diferentes, cada uno diseñado para obtener información específica del sitio de Cinema La Plata:
+shows.py: Este spider navega por la cartelera del cine disponible en https://www.cinemalaplata.com/Home/Index#cartelera y extrae toda la información disponible sobre las películas actualmente en exhibición en los cines de La Plata.
+
+movie.py: Este spider permite obtener información detallada sobre una película específica. Para ejecutarlo, se debe proporcionar el ID de la película como parámetro (un número de 4 dígitos). Este spider devuelve detalles completos de la película, incluyendo las funciones disponibles en todos los cines y los formatos e idiomas en los que se muestra la pelicula.
+
+everything.py: Este es el spider más completo y es el que se se va a usar en "producción". Combina las funcionalidades de shows.py y movie.py. Primero, navega por la cartelera y extrae todas las películas disponibles en ese momento. Luego, recorre cada película encontrada y recopila tanto la información de la película como de todas las funciones disponibles en los cines de La Plata.
+
+
+5. Ejecución de los Spiders:
+
+Para ejecutar los spiders, abre una terminal en el directorio raíz del proyecto, que es "cinelp-scraper", y usa los comandos a continuación:
+Para ejecutar shows.py: Este comando obtendrá información sobre todas las películas de la cartelera y guardará los resultados en un archivo .json en el directorio base del proyecto.
+	scrapy crawl shows --output nombre_archivo_salida.json
+
+Para ejecutar movie.py: Este spider requiere que ingreses el ID de la película (un número de 4 dígitos) como parámetro. Extraerá la información completa de la película específica y guardará los resultados en un archivo .json.
+	scrapy crawl movie -a "id=id_de_la_pelicula" --output nombre_archivo_salida.json
+
+Para ejecutar everything.py: Este spider realiza el scraping completo de todas las películas en la cartelera y de cada función disponible en los cines. Los resultados se guardarán en un archivo .json en el directorio base.
+	scrapy crawl everything --output nombre_archivo_salida.json
+
+Todos los archivos de salida en formato .json se crean en el directorio raíz del proyecto "cinelp-scraper".

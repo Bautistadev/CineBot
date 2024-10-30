@@ -15,6 +15,7 @@ public class GeneroController {
         this.generoService = generoService;
     }
 
+
     @GetMapping("/Genero/suscribe")
     public ResponseEntity suscribe(@RequestParam("userId") Integer userId, @RequestParam("genderId") Integer genderId){
         this.generoService.genderSuscribe(userId,genderId);
