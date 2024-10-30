@@ -2,12 +2,16 @@
 
 import React, { useState } from 'react';
 import { Button } from "../components/button"
+import Link from "next/link"
 
 function Page() {
   // Estado inicial con los campos del UsuarioDTO
   const [formData, setFormData] = useState({
+    nombre: '',
+    apellido: '',
     email: '',
     password: '',
+    telefono: '',
   });
 
   // Manejo de cambios en los campos del formulario
@@ -51,30 +55,6 @@ function Page() {
         <h2 className="text-black">Iniciar Sesión</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label className="text-black">Nombre:</label>
-            <input
-              type="text"
-              name="nombre"
-              placeholder="Escribe un mensaje..."
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none text-gray-700 focus:ring-2 focus:ring-blue-500"
-              value={formData.nombre}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
-            <label className="text-black">Apellido:</label>
-            <input
-              type="text"
-              name="apellido"
-              placeholder="Escribe tu apellido..."
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none text-gray-700 focus:ring-2 focus:ring-blue-500"
-              value={formData.apellido}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div>
             <label className="text-black">Email:</label>
             <input
               type="email"
@@ -98,22 +78,16 @@ function Page() {
               required
             />
           </div>
-          <div>
-            <label className="text-black">Teléfono:</label>
-            <input
-              type="tel"
-              name="telefono"
-              placeholder="Escribe tu teléfono..."
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none text-gray-700 focus:ring-2 focus:ring-blue-500"
-              value={formData.telefono}
-              onChange={handleChange}
-              required
-            />
-          </div>
           <div className="space-x-4 mt-4">
-            <Button>Registrarse</Button>
+            <Button>Inicio de sesión</Button>
           </div>
+          
         </form>
+        <div className="space-x-4 mt-4">
+            <Link href="/singin">
+                <Button>Registrarse</Button>
+            </Link>
+          </div>
       </div>
     </section>
 
