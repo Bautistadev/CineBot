@@ -1,0 +1,41 @@
+package com.spring.cinebot.Controller;
+
+import com.spring.cinebot.DTO.UsuarioDTO;
+import com.spring.cinebot.Service.UsuarioService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/cineBot/")
+public class UsuarioController {
+
+    private UsuarioService usuarioService;
+
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+
+    }
+
+    @GetMapping("/Usuario")
+    public ResponseEntity<List<UsuarioDTO>> findAll(){
+        return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.findAll());
+    }
+
+    @GetMapping("/Usuario/findById")
+    public ResponseEntity<UsuarioDTO> findById(@RequestParam("id") Integer id){
+        return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.findById(id));
+    }
+
+    @GetMapping("/Usuario/findByEmail")
+    public ResponseEntity<UsuarioDTO> findByEmail(@RequestParam("email") String email){
+        return ResponseEntity.status(HttpStatus.OK).body(this.usuarioService.findByEmail(email));
+    }
+
+
+}
