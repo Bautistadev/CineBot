@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react';
+import { getMovies } from '../lib/api/cartelera';
 
 const ChatPage = () => {
   const [messages, setMessages] = useState([]);
@@ -15,17 +16,35 @@ const ChatPage = () => {
     ]);
   }, []);
 
-  const handleSendMessage = () => {
+  const fetchCartelera = async () => {
+    const data = await getMovies()
+    return data;
+  }
+
+  const handleSendMessage = async () => {
     if (inputValue.trim()) {
       const newMessages = [...messages, { text: inputValue, sender: 'user' }];
       setMessages(newMessages);
 
       // Verificar si el usuario escribe la palabra "funciones"
       if (inputValue.trim().toLowerCase() === 'estrenos') {
+        const data = await fetchCartelera()
+        console.log("DATA")
+        console.log(data)
+        const text = "---------ESTRENOS---------\n" + data.map((item) => {
+          return `Pelicula: ${item.pelicula.nombre}\n` +
+                 `Cine: ${item.cine.nombre}\n` +
+                 `Fecha: ${item.fecha}\n` +
+                 `Hora: ${item.hora}\n` +
+                 `Director: ${item.pelicula.director}\n` +
+                 `Duracion: ${item.pelicula.duracion} min\n` +
+                 `Genero: ${item.pelicula.genero.nombre}\n` +
+                 '----------------------------------\n';
+        });
         setMessages([
           ...newMessages,
           {
-            text: `JUNG KOOK: I AM STILL\n\nFUNCIONES\n\tCINE: CINEMA CITY \n\t- 20:10 - HD - Subtitulada\n\n-------------------------------------\n\nGUASÓN 2: FOLIE À DEUX\n\nFUNCIONES\n\n\tCINE: PARADISO\n\t- 12:00 - HD - Castellano\n\t- 18:00 - HD - Castellano\n\t- 15:00 - HD - Subtitulada\n\t- 20:00 - HD - Subtitulada\n\t- 23:00 - HD - Subtitulada\n\n\tCINE: CINEMA OCHO\n\t- 12:30 - HD - Castellano\n\t- 15:30 - HD - Castellano\n\t- 18:30 - HD - Castellano\n\t- 21:30 - HD - Castellano\n\n\tCINE: CINEMA CITY\n\t- 12:45 - 4D - Castellano\n\t- 15:45 - 4D - Castellano\n\t- 13:10 - HD - Subtitulada\n\t- 19:10 - HD - Subtitulada\n\t- 22:10 - HD - Subtitulada\n\t- 16:10 - HD - Castellano\n\t- 18:45 - 4D - Subtitulada\n\t- 21:45 - 4D - Subtitulada`,
+            text: text,
             sender: 'bot',
           },
         ]);
