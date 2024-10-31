@@ -1,1 +1,4 @@
 .env
+/json2sql/bin/Debug
+/json2sql/obj
+/json2sql/.vs
