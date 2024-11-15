@@ -15,6 +15,7 @@ public abstract class UsuarioMapper {
     @Mapping(source = "telefono",target = "telefono")
     @Mapping(source = "email",target = "email")
     @Mapping(source = "password",target = "password")
+    @Mapping(source = "generosSuscritos",target = "generoDTOList")
     public abstract UsuarioDTO userToUserDTO(Usuario user);
 
 

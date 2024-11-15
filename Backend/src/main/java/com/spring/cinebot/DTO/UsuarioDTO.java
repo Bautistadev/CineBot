@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
-@AllArgsConstructor
-@NoArgsConstructor
 public class UsuarioDTO {
 
     @NotBlank
@@ -23,6 +21,19 @@ public class UsuarioDTO {
     private String telefono;
 
     private List<GeneroDTO> generoDTOList;
+
+    public UsuarioDTO(Integer id, String nombre, String apellido, String email, String password, String telefono, List<GeneroDTO> generoDTOList) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.password = password;
+        this.telefono = telefono;
+        this.generoDTOList = generoDTOList;
+    }
+
+    public UsuarioDTO() {
+    }
 
     public @NotBlank Integer getId() {
         return id;
@@ -70,6 +81,14 @@ public class UsuarioDTO {
 
     public void setTelefono(@NotNull String telefono) {
         this.telefono = telefono;
+    }
+
+    public List<GeneroDTO> getGeneroDTOList() {
+        return generoDTOList;
+    }
+
+    public void setGeneroDTOList(List<GeneroDTO> generoDTOList) {
+        this.generoDTOList = generoDTOList;
     }
 
     @Override
