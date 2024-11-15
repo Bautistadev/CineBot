@@ -2,7 +2,7 @@
   "profiles": {
     "json2sql": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\user\\Documents\\GitHub\\CineBot\\json2sql\\todo.json\""
+      "commandLineArgs": "--json \"C:\\Users\\Windows10\\Documents\\GitHub\\CineBot\\json2sql\\todo_15_11.json\" --save --host \"localhost\" --port 3306"
     },
     "Container (Dockerfile)": {
       "commandName": "Docker"
