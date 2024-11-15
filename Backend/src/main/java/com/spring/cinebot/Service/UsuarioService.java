@@ -69,6 +69,38 @@ public class UsuarioService implements UsuarioServiceContract {
 
     }
 
+
+
+    public UsuarioDTO findByEmail(String email){
+
+        if(email == null || email.isEmpty())
+            throw new NotContentException("PARAMETRO VACIO");
+
+        if(!this.validateEmail(email))
+            throw new BadRequestException("MAIL INVALIDO");
+
+        return this.usuarioRepository
+                .findByEmail(email)
+                .map(usuarioMapper::userToUserDTO)
+                .orElseThrow(()->new NotContentException("USUARIO NO EXISTENTE"));
+    }
+
+
+    public UsuarioDTO findByTelefono(String telefono){
+        if(telefono == null)
+            throw new NotContentException("PARAMETRO VACIO");
+
+        if(allDigits(telefono))
+            throw new BadRequestException("ERROR EN EL INGRESO EDL TELEFONO");
+
+        return this.usuarioRepository
+                .findByTelefono(telefono)
+                .map(usuarioMapper::userToUserDTO)
+                .orElseThrow(()-> new NotContentException("USUARIO NO EXISTENTE"));
+    }
+
+
+
     @Override
     public Boolean existById(Integer id) {
 
@@ -111,6 +143,14 @@ public class UsuarioService implements UsuarioServiceContract {
             return false;
 
         return true;
+    }
+
+
+    private Boolean allDigits(String input){
+        if(input == null || input.isEmpty())
+            return false;
+
+        return input.chars().allMatch(Character::isDigit);
     }
 
 }

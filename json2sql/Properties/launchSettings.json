@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "json2sql": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\user\\Documents\\GitHub\\CineBot\\json2sql\\todo.json\""
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

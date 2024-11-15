@@ -32,44 +32,10 @@ import java.util.stream.Collectors;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.spring.cinebot"})
-public class MainApplication implements CommandLineRunner {
+public class MainApplication {
 
 	public static void main(String[] args) {
-
-		ConfigurableApplicationContext ctx = SpringApplication.run(MainApplication.class, args);
-
+		SpringApplication.run(MainApplication.class, args);
 	}
 
-	@Autowired
-	ApplicationContext ctx;
-
-
-
-	@Override
-	public void run(String... args) throws Exception {
-
-		UsuarioRepository repository = ctx.getBean(UsuarioRepository.class);
-		UsuarioMapper usuarioMapper = ctx.getBean(UsuarioMapper.class);
-
-		UsuarioService carteleraservice = ctx.getBean(UsuarioService.class);
-
-		GeneroService generoRepository = ctx.getBean(GeneroService.class);
-		GeneroMapper generoMapper = ctx.getBean(GeneroMapper.class);
-
-		PeliculaRepository pe = ctx.getBean(PeliculaRepository.class);
-		PeliculaMapper pem = ctx.getBean(PeliculaMapper.class);
-
-		CarteleraRepository carteleraRepository = ctx.getBean(CarteleraRepository.class);
-		CarteleraMapper carteleraMapper = ctx.getBean(CarteleraMapper.class);
-
-		Pelicula pelicula = new Pelicula();
-		pelicula.setId(1);
-
-		Cine cine = new Cine();
-		cine.setId(1);
-
-		System.out.println(carteleraMapper.carteleraTOCarteleraDTO(carteleraRepository.findById(1).get()));
-
-
-	}
 }

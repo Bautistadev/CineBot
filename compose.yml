@@ -15,3 +15,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+
+  database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    ports:
+      - 3306:3306
