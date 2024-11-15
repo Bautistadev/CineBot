@@ -1,4 +1,7 @@
-﻿using json2sql.Model;
+﻿using json2sql.Context;
+using json2sql.Model;
+using LinqToDB;
+using LinqToDB.Data;
 using System;
 using System.IO;
 using System.Text;
@@ -8,6 +11,11 @@ using System.Threading.Tasks;
 namespace json2sql;
 internal class Program
 {
+    private static string filePath;
+    private static List<Genero> generos;
+    private static List<Pelicula> peliculas;
+    private static List<Cartelera> cartelera;
+
     static async Task Main(string[] args)
     {
         Console.WriteLine("Iniciada ejecución del programa");
@@ -16,8 +24,33 @@ internal class Program
             Console.WriteLine("Por favor, proporciona la ruta del archivo JSON como argumento.");
             return;
         }
-        string filePath = args[0];
+        filePath = args[0];
 
+        await ReadJson();
+
+
+    }
+
+    public static async Task PersistInDatabase()
+    {
+        using var db = new CinebotDB();
+        bool anyCines = await db.Cines.AnyAsync();
+        if (!anyCines)
+        {
+            List<Cine> cines = new List<Cine>
+            {
+                new Cine { id = 1, nombre = "CINEMA CITY", calle = "50", numero = "723" },
+                new Cine { id = 2, nombre = "CINEMA OCHO", calle = "8", numero = "981" },
+                new Cine { id = 3, nombre = "SAN MARTIN", calle = "7", numero = "923" },
+                new Cine { id = 4, nombre = "PARADISO", calle = "46", numero = "780" },
+                new Cine { id = 5, nombre = "CINEMA ROCHA", calle = "49", numero = "0" }
+            };
+            await db.BulkCopyAsync(cines);
+        }
+    }
+
+    public static async Task ReadJson()
+    {
         if (!File.Exists(filePath))
         {
             Console.WriteLine($"El archivo {filePath} no existe.");
@@ -30,8 +63,8 @@ internal class Program
             string jsonContent = await File.ReadAllTextAsync(filePath);
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             List<PeliculaJson> peliculasJson = JsonSerializer.Deserialize<List<PeliculaJson>>(jsonContent, options);
-            
-            if(peliculasJson == null || peliculasJson.Count() == 0)
+
+            if (peliculasJson == null || peliculasJson.Count() == 0)
             {
                 Console.WriteLine("El archivo JSON no contiene peliculas");
                 return;
@@ -45,10 +78,10 @@ internal class Program
                 new Cine { id = 4, nombre = "PARADISO", calle = "46", numero = "780" },
                 new Cine { id = 5, nombre = "CINEMA ROCHA", calle = "49", numero = "0" }
             };
-            
-            List<Genero> generos = new List<Genero>();
-            List<Pelicula> peliculas = new List<Pelicula>();
-            List<Cartelera> cartelera = new List<Cartelera>();
+
+            generos = new List<Genero>();
+            peliculas = new List<Pelicula>();
+            cartelera = new List<Cartelera>();
             int generoId = 1;
 
             foreach (var peliculaJson in peliculasJson)
@@ -66,14 +99,14 @@ internal class Program
                 if (!int.TryParse(peliculaJson.LengthMinutes.Replace(" min", ""), out duracion))
                 {
                     Console.WriteLine($"Advertencia: duración no válida para '{peliculaJson.Title}' con bookingId: {peliculaJson.BookingId}");
-                    duracion = 0; 
+                    duracion = 0;
                 }
                 bool idPeliculaValido = int.TryParse(peliculaJson.MovieId, out int idPelicula);
                 if (!idPeliculaValido)
                 {
                     Console.WriteLine($"Advertencia: id de pelicula no valido para '{peliculaJson.Title}' con bookingId: {peliculaJson.BookingId}");
                     idPelicula = 0;
-                }            
+                }
                 var pelicula = new Pelicula
                 {
                     id = idPelicula,
@@ -112,7 +145,7 @@ internal class Program
                 bool idCarteleraValido = int.TryParse(peliculaJson.BookingId, out int idCartelera);
                 if (!idCarteleraValido)
                     Console.WriteLine($"Advertencia: id de pelicula no valido para '{peliculaJson.Title}' con bookingId: {peliculaJson.BookingId}");
-                else 
+                else
                 {
                     var carteleraItem = new Cartelera
                     {
@@ -126,9 +159,6 @@ internal class Program
                 }
             }
 
-            string script = CreateSqlScript(cines, generos, peliculas, cartelera);
-            await SaveScriptFile(script, "script_insercion.sql");
-            
         }
         catch (Exception ex)
         {
