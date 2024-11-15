@@ -40,8 +40,8 @@ export async function GET(request) {
         react: <EmailSubs pelicula={pelicula} />, // Usamos EmailSubs
       });
     }
-
-    return NextResponse.json(emailResponse);
+    return NextResponse.redirect(new URL("/", request.url));
+    //return NextResponse.json(emailResponse); error catch
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
