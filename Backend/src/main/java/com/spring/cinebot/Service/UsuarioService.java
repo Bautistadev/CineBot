@@ -1,7 +1,9 @@
 package com.spring.cinebot.Service;
 
+import com.spring.cinebot.DTO.LoginDTO;
 import com.spring.cinebot.DTO.UsuarioDTO;
 import com.spring.cinebot.DTO.UsuarioRequestDTO;
+import com.spring.cinebot.Entity.Usuario;
 import com.spring.cinebot.Exceptions.BadRequestException;
 import com.spring.cinebot.Exceptions.ConflictException;
 import com.spring.cinebot.Exceptions.NotContentException;
@@ -153,4 +155,17 @@ public class UsuarioService implements UsuarioServiceContract {
         return input.chars().allMatch(Character::isDigit);
     }
 
+
+    public UsuarioDTO generateToken(LoginDTO loginDTO){
+        if(this.usuarioRepository.findByEmail(loginDTO.getEmail()) == null)
+            throw new NotContentException("Usuario no registrado");
+
+        Usuario usuario= this.usuarioRepository.findByEmail(loginDTO.getEmail()).get();
+
+        if(!usuario.getPassword().equals(loginDTO.getPassword()))
+            throw new NotContentException("Incorrect password");
+
+
+        return this.usuarioMapper.userToUserDTO(usuario);
+    }
 }

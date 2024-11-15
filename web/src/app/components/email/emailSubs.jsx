@@ -19,7 +19,7 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}/images`
   : "/images";
 
-export const CineNotificationEmail = ({ pelicula }) => (
+export const EmailSubs  = ({ pelicula }) => (
   <Html>
       <Head />
       <Preview>Cinebot: ¡No te pierdas tu próxima película favorita!</Preview>
@@ -37,17 +37,16 @@ export const CineNotificationEmail = ({ pelicula }) => (
 
               <Section style={section}>
                   <Text style={text}>
-                      Te avisamos que estaremos atentos a las películas de tu preferencia.
+                      <strong>Una nueva pelicula de tu interes esta en cartelera.</strong>
                   </Text>
 
                   <Text style={text}>
-                      A partir de ahora, recibirás notificaciones de nuevas películas en
-                      cartelera que coincidan con tus intereses, ya sea por género,
-                      autor, o incluso por el título específico.
+                      Notificaciones de nuevas películas en
+                      cartelera que coinciden con tus intereses.
                   </Text>
 
                   <Text style={highlightText}>
-                      🎥 Próxima película para: <strong>{pelicula}</strong> 
+                      🎥 Próxima película: <strong>{pelicula}</strong> 
                   </Text>
 
                   <Link href={`${baseUrl}/movie/spiderman-no-way-home`} style={buttonLink}>
@@ -72,7 +71,7 @@ export const CineNotificationEmail = ({ pelicula }) => (
   </Html>
 );
 
-export default CineNotificationEmail;
+export default EmailSubs ;
 
 const main = {
   fontFamily: '"Google Sans", Roboto, Arial, sans-serif',
