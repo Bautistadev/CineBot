@@ -19,7 +19,7 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}/images`
   : "/images";
 
-export const CineNotificationEmail = ({ pelicula }) => (
+export const EmailSubs  = ({ pelicula }) => (
   <Html>
       <Head />
       <Preview>Cinebot: ¡No te pierdas tu próxima película favorita!</Preview>
@@ -71,7 +71,7 @@ export const CineNotificationEmail = ({ pelicula }) => (
   </Html>
 );
 
-export default CineNotificationEmail;
+export default EmailSubs ;
 
 const main = {
   fontFamily: '"Google Sans", Roboto, Arial, sans-serif',
