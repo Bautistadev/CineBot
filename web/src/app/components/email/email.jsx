@@ -19,7 +19,7 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}/images`
   : "/images";
 
-export const CineNotificationEmail = () => (
+export const CineNotificationEmail = ({ pelicula }) => (
   <Html>
       <Head />
       <Preview>Cinebot: ¡No te pierdas tu próxima película favorita!</Preview>
@@ -47,11 +47,9 @@ export const CineNotificationEmail = () => (
                   </Text>
 
                   <Text style={highlightText}>
-                      🎥 Próxima notificación para: <strong>Spiderman: No Way Home</strong>
+                      🎥 Próxima película para: <strong>{pelicula}</strong> 
                   </Text>
 
-
-                 
                   <Link href={`${baseUrl}/movie/spiderman-no-way-home`} style={buttonLink}>
                       Ver más detalles
                   </Link>
