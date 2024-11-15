@@ -16,16 +16,16 @@ Ejemplos de Ejecución
 
 1. Exportar un Script SQL
 Este comando toma un archivo JSON de entrada y genera un script SQL:
-dotnet run -- -j "peliculas.json" -e
+./json2sql -j "peliculas.json" -e
 
 2. Guardar en la Base de Datos
 Guarda los datos directamente en la base de datos MySQL:
-dotnet run -- -j "peliculas.json" -s
+./json2sql -j "peliculas.json" -s
 
 3. Exportar y Guardar al Mismo Tiempo
 Realiza ambas acciones, exportando el script SQL y guardando en la base de datos:
-dotnet run -- -j "peliculas.json" -e -s
+./json2sql -j "peliculas.json" -e -s
 
 4. Especificar Nombre del Archivo y Host
 Personaliza el nombre del archivo SQL y especifica el host y puerto de la base de datos:
-dotnet run -- -j "peliculas.json" -e -n "custom_script.sql" -h "192.168.1.100" -p 3307
+./json2sql -j "peliculas.json" -e -n "custom_script.sql" -h "192.168.1.100" -p 3307
