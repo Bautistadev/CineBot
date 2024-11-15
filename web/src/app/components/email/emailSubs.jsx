@@ -37,7 +37,7 @@ export const CineNotificationEmail = ({ pelicula }) => (
 
               <Section style={section}>
                   <Text style={text}>
-                      Una nueva pelicula de tu interes esta en cartelera.
+                      <strong>Una nueva pelicula de tu interes esta en cartelera.</strong>
                   </Text>
 
                   <Text style={text}>
@@ -46,7 +46,7 @@ export const CineNotificationEmail = ({ pelicula }) => (
                   </Text>
 
                   <Text style={highlightText}>
-                      🎥 Próxima película para: <strong>{pelicula}</strong> 
+                      🎥 Próxima película: <strong>{pelicula}</strong> 
                   </Text>
 
                   <Link href={`${baseUrl}/movie/spiderman-no-way-home`} style={buttonLink}>

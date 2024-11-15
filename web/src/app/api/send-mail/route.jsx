@@ -1,5 +1,5 @@
 import { Resend } from "resend";
-import { CineNotificationEmail  } from "../../components/email/email";
+import { CineNotificationEmail  } from "../../components/email/emailSubs";
 import { NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
