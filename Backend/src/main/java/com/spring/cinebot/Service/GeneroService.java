@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -84,7 +85,13 @@ public class GeneroService implements GeneroServiceContract {
 
         Usuario usuario = this.usuarioRepository.findById(UserId).get();
         Genero genero =  this.generoRepository.findById(GenderId).orElseThrow(()->new NotContentException("GENERO NO EXISTENTE"));
+        Optional<Genero> generoOptional = usuario.getGenerosSuscritos().stream()
+                .filter(g -> g.getId().equals(GenderId))
+                .findAny();
 
+        if(generoOptional.isPresent()){
+            throw new BadRequestException("YA ESTA SUBCRIPTO AL GENERO");
+        }
         usuario.suscribir(genero);
 
         this.usuarioRepository.save(usuario);
