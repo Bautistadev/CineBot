@@ -16,12 +16,8 @@
     "next": "14.2.13",
     "react": "^18",
     "react-dom": "^18",
-<<<<<<< HEAD
     "react-email": "^1.10.1",
     "react-toastify": "^10.0.6",
-=======
-    "react-email": "1.10.1",
->>>>>>> 48d011f2155ba8dbbcb3fbc1bda4c3a65b18b3e3
     "resend": "^4.0.0"
   },
   "devDependencies": {
