@@ -18,6 +18,15 @@ services:
     ports:
       - 3000:3000
 
+  notification_handler:
+    image: notification_handler
+    build:
+      context: ./notification_handler
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+      - frontend
+
   database:
     build:
       context: ./database
