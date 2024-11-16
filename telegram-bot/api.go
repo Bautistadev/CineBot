@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"net/http"
+	"strings"
 )
 
 func getMovies() (string, error) {
@@ -48,4 +50,14 @@ func getMovieByName(name string) (string, error) {
 	}
 
 	return string(body), nil
+}
+
+func suscribeToGenre(chatID int64, genre string) error {
+	resp, err := http.Post(cfg.BackendURL+"/api/v1/cineBot/Gerero/suscribe", "application/json", strings.NewReader(fmt.Sprintf(`{"chat_id": %d, "genre": "%s"}`, chatID, genre)))
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	return nil
 }

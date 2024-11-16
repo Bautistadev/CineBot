@@ -1,0 +1,3 @@
+sqlmodel
+requests
+mysql-connector-python

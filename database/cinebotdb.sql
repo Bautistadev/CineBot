@@ -1,5 +1,3 @@
-
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -27,7 +25,7 @@ USE `cinebotdb` ;
 -- Tabla `cinebotdb`.`Usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cinebotdb`.`Usuario` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `apellido` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
@@ -41,7 +39,7 @@ ENGINE = InnoDB;
 -- Tabla `cinebotdb`.`Genero`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cinebotdb`.`Genero` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45)NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -51,7 +49,7 @@ ENGINE = InnoDB;
 -- Tabla `cinebotdb`.`Pelicula`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cinebotdb`.`Pelicula` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `Genero_id` INT NOT NULL,
   `director` VARCHAR(45) NOT NULL,
@@ -70,7 +68,7 @@ ENGINE = InnoDB;
 -- Tabla `cinebotdb`.`Cine`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cinebotdb`.`Cine` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `calle` VARCHAR(45) NOT NULL,
   `numero` VARCHAR(45) NOT NULL,
@@ -82,7 +80,7 @@ ENGINE = InnoDB;
 -- Table `cinebotdb`.`Cartelera`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cinebotdb`.`Cartelera` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `fecha` DATE NOT NULL,
   `hora` TIME NOT NULL,
   `Pelicula_id` INT NOT NULL,
@@ -107,7 +105,7 @@ ENGINE = InnoDB;
 -- Tabla `cinebotdb`.`GeneroXUsuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cinebotdb`.`GeneroXUsuario` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `Usuario_id` INT NOT NULL,
   `Genero_id` INT NOT NULL,
   PRIMARY KEY (`id`),
