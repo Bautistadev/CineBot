@@ -1,129 +1,129 @@
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_UNIQUE_cHEcKS=@@UNIQUE_cHEcKS, UNIQUE_cHEcKS=0;
 
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_FOREIgN_KEY_cHEcKS=@@FOREIgN_KEY_cHEcKS, FOREIgN_KEY_cHEcKS=0;
 
 
 -- --------------------------------------------------------
--- ONLY_FULL_GROUP_BY: Requiere que las columnas que no se agreguen en una consulta GROUP BY estén dentro de una función de agregación, asegurando que los resultados sean consistentes.
--- STRICT_TRANS_TABLES: Hace que las transacciones fallen si se producen errores como la inserción de datos inválidos o la violación de restricciones
+-- ONLY_FULL_gROUP_BY: Requiere que las columnas que no se agreguen en una consulta gROUP BY estén dentro de una función de agregación, asegurando que los resultados sean consistentes.
+-- STRIcT_TRANS_TABLES: Hace que las transacciones fallen si se producen errores como la inserción de datos inválidos o la violación de restricciones
 -- NO_ZERO_IN_DATE y NO_ZERO_DATE: Impiden la inserción de fechas no válidas, como "0000-00-00"
--- ERROR_FOR_DIVISION_BY_ZERO: Genera un error si hay una división por cero en lugar de devolver NULL.
--- NO_ENGINE_SUBSTITUTION: Impide que MySQL sustituya el motor de almacenamiento especificado por otro si el motor predeterminado no está disponible.
+-- ERROR_FOR_DIVISION_BY_ZERO: genera un error si hay una división por cero en lugar de devolver NULL.
+-- NO_ENgINE_SUBSTITUTION: Impide que MySQL sustituya el motor de almacenamiento especificado por otro si el motor predeterminado no está disponible.
 -- --------------------------------------------------------
 
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_gROUP_BY,STRIcT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENgINE_SUBSTITUTION';
 
 
 -- -----------------------------------------------------
 -- Schema cinebotdb
--- Usar CREATE TABLE Y CREARE SCHEMA, es lo mismo
+-- Usar cREATE TABLE Y cREARE ScHEMA, es lo mismo
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `cinebotdb` DEFAULT CHARACTER SET utf8 ;
+cREATE ScHEMA IF NOT ExISTS `cinebotdb` DEFAULT cHARAcTER SET utf8 ;
 USE `cinebotdb` ;
 
 -- -----------------------------------------------------
--- Tabla `cinebotdb`.`Usuario`
+-- Tabla `cinebotdb`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cinebotdb`.`Usuario` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `apellido` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  `Telefono` VARCHAR(45) NOT NULL,
+cREATE TABLE IF NOT ExISTS `cinebotdb`.`usuario` (
+  `id` INT NOT NULL AUTO_INcREMENT,
+  `nombre` VARcHAR(45) NOT NULL,
+  `apellido` VARcHAR(45) NOT NULL,
+  `email` VARcHAR(45) NOT NULL,
+  `password` VARcHAR(45) NOT NULL,
+  `Telefono` VARcHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENgINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Tabla `cinebotdb`.`Genero`
+-- Tabla `cinebotdb`.`genero`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cinebotdb`.`Genero` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45)NOT NULL,
+cREATE TABLE IF NOT ExISTS `cinebotdb`.`genero` (
+  `id` INT NOT NULL AUTO_INcREMENT,
+  `nombre` VARcHAR(45)NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENgINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Tabla `cinebotdb`.`Pelicula`
+-- Tabla `cinebotdb`.`pelicula`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cinebotdb`.`Pelicula` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `Genero_id` INT NOT NULL,
-  `director` VARCHAR(45) NOT NULL,
+cREATE TABLE IF NOT ExISTS `cinebotdb`.`pelicula` (
+  `id` INT NOT NULL AUTO_INcREMENT,
+  `nombre` VARcHAR(45) NOT NULL,
+  `genero_id` INT NOT NULL,
+  `director` VARcHAR(45) NOT NULL,
   `duracion` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Pelicula_Genero1_idx` (`Genero_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Pelicula_Genero1`
-    FOREIGN KEY (`Genero_id`)
-    REFERENCES `cinebotdb`.`Genero` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  INDEx `fk_pelicula_genero1_idx` (`genero_id` ASc) VISIBLE,
+  cONSTRAINT `fk_pelicula_genero1`
+    FOREIgN KEY (`genero_id`)
+    REFERENcES `cinebotdb`.`genero` (`id`)
+    ON DELETE NO AcTION
+    ON UPDATE NO AcTION)
+ENgINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Tabla `cinebotdb`.`Cine`
+-- Tabla `cinebotdb`.`cine`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cinebotdb`.`Cine` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `calle` VARCHAR(45) NOT NULL,
-  `numero` VARCHAR(45) NOT NULL,
+cREATE TABLE IF NOT ExISTS `cinebotdb`.`cine` (
+  `id` INT NOT NULL AUTO_INcREMENT,
+  `nombre` VARcHAR(45) NOT NULL,
+  `calle` VARcHAR(45) NOT NULL,
+  `numero` VARcHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+ENgINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `cinebotdb`.`Cartelera`
+-- Table `cinebotdb`.`cartelera`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cinebotdb`.`Cartelera` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+cREATE TABLE IF NOT ExISTS `cinebotdb`.`cartelera` (
+  `id` INT NOT NULL AUTO_INcREMENT,
   `fecha` DATE NOT NULL,
   `hora` TIME NOT NULL,
-  `Pelicula_id` INT NOT NULL,
-  `Cine_id` INT NOT NULL,
+  `pelicula_id` INT NOT NULL,
+  `cine_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_Cartelera_Pelicula1_idx` (`Pelicula_id` ASC) VISIBLE,
-  INDEX `fk_Cartelera_Cine1_idx` (`Cine_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Cartelera_Pelicula1`
-    FOREIGN KEY (`Pelicula_id`)
-    REFERENCES `cinebotdb`.`Pelicula` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Cartelera_Cine1`
-    FOREIGN KEY (`Cine_id`)
-    REFERENCES `cinebotdb`.`Cine` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  INDEx `fk_cartelera_pelicula1_idx` (`pelicula_id` ASc) VISIBLE,
+  INDEx `fk_cartelera_cine1_idx` (`cine_id` ASc) VISIBLE,
+  cONSTRAINT `fk_cartelera_pelicula1`
+    FOREIgN KEY (`pelicula_id`)
+    REFERENcES `cinebotdb`.`pelicula` (`id`)
+    ON DELETE NO AcTION
+    ON UPDATE NO AcTION,
+  cONSTRAINT `fk_cartelera_cine1`
+    FOREIgN KEY (`cine_id`)
+    REFERENcES `cinebotdb`.`cine` (`id`)
+    ON DELETE NO AcTION
+    ON UPDATE NO AcTION)
+ENgINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Tabla `cinebotdb`.`GeneroXUsuario`
+-- Tabla `cinebotdb`.`generoxusuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cinebotdb`.`GeneroXUsuario` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `Usuario_id` INT NOT NULL,
-  `Genero_id` INT NOT NULL,
+cREATE TABLE IF NOT ExISTS `cinebotdb`.`generoxusuario` (
+  `id` INT NOT NULL AUTO_INcREMENT,
+  `usuario_id` INT NOT NULL,
+  `genero_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_GeneroXUsuario_Usuario_idx` (`Usuario_id` ASC) VISIBLE,
-  INDEX `fk_GeneroXUsuario_Genero1_idx` (`Genero_id` ASC) VISIBLE,
-  CONSTRAINT `fk_GeneroXUsuario_Usuario`
-    FOREIGN KEY (`Usuario_id`)
-    REFERENCES `cinebotdb`.`Usuario` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_GeneroXUsuario_Genero1`
-    FOREIGN KEY (`Genero_id`)
-    REFERENCES `cinebotdb`.`Genero` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  INDEx `fk_generoxusuario_usuario_idx` (`usuario_id` ASc) VISIBLE,
+  INDEx `fk_generoxusuario_genero1_idx` (`genero_id` ASc) VISIBLE,
+  cONSTRAINT `fk_generoxusuario_usuario`
+    FOREIgN KEY (`usuario_id`)
+    REFERENcES `cinebotdb`.`usuario` (`id`)
+    ON DELETE NO AcTION
+    ON UPDATE NO AcTION,
+  cONSTRAINT `fk_generoxusuario_genero1`
+    FOREIgN KEY (`genero_id`)
+    REFERENcES `cinebotdb`.`genero` (`id`)
+    ON DELETE NO AcTION
+    ON UPDATE NO AcTION)
+ENgINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+SET FOREIgN_KEY_cHEcKS=@OLD_FOREIgN_KEY_cHEcKS;
+SET UNIQUE_cHEcKS=@OLD_UNIQUE_cHEcKS;

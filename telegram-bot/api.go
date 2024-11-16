@@ -8,7 +8,7 @@ import (
 )
 
 func getMovies() (string, error) {
-	resp, err := http.Get(cfg.BackendURL + "/movies")
+	resp, err := http.Get(cfg.BackendURL + "/Movies/allMovies")
 	if err != nil {
 		return "", err
 	}
