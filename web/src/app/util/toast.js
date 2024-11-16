@@ -14,7 +14,7 @@ export const successToast = (message) => {
 }
 
 export const errorToast = (message) => {
-    toast.error("Ocurrio un error", {
+    toast.error("Ocurrio un error :(", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,

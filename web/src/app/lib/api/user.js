@@ -6,6 +6,10 @@ export async function createUser(data){
     return await apiRequest(`/Usuario/save`, 'POST', data, 'application/json')
 }
 
+export async function loginUser(data){
+    return await apiRequest(`/Login`, 'POST', data, 'application/json')
+}
+
 export async function findById(id){
     return await apiRequest(`/Usuario/findById?id=${id}`, 'GET', null, 'application/json')
 }

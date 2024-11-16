@@ -1,17 +1,29 @@
 'use client'
 
-import { successToast } from "../util/toast";
+import { loginUser } from "../lib/api/user";
+import { errorToast, successToast } from "../util/toast";
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "../store/authStore";
 
 export default function Login() {
+  const router = useRouter();
+  const login = useAuthStore((state) => state.login);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
-    try{
-      console.log("LOGIN")
-    }catch(err){
-      console.log("Ocurrio un error:", err)
+    const data = {
+      email: formData.get("email"),
+      password: formData.get("password")
+    }
+    try {
+      const response = await loginUser(data);
+      localStorage.setItem("userId", response.id);
+      login();
+      router.push("/chat");
+      successToast("Login exitoso!");
+    } catch (err) {
+      errorToast();
     }
   };
 

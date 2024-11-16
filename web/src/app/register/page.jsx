@@ -1,8 +1,14 @@
 'use client'
 
 import { createUser } from "../lib/api/user";
+import { useRouter } from "next/navigation";
+import { errorToast } from "../util/toast";
+
 
 export default function Register() {
+
+  const router = useRouter();
+
     const handleSubmit = async (e) => {
       e.preventDefault();
       const formData = new FormData(e.target);
@@ -15,8 +21,10 @@ export default function Register() {
       };
       try{
         await createUser(data)
+        router.push("/login")
+        successToast("Registro exitoso!")
       }catch(err){
-        console.log(err)
+        errorToast()
       }
     };
 
