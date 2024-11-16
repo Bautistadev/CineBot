@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { getMovies, getMoviesByGenre, getMoviesByName } from '../lib/api/cartelera';
+import { subscribeToGender } from '../lib/api/genero';
+import { successToast } from '../util/toast';
 
 const ChatPage = () => {
   const [messages, setMessages] = useState([]);
@@ -9,17 +11,19 @@ const ChatPage = () => {
   const [isStartMenu, setIsStartMenu] = useState(true)
   const [isSelectingGender, setIsSelectingGender] = useState(false)
   const [isSelectingName, setIsSelectingName] = useState(false)
+  const [isSubscribing, setIsSubscribing] = useState(false)
 
   const menuText = 'Que le gustaria hacer?\n' +
-  '1. Ver cartelera\n' +
-  '2. Ver peliculas por genero\n' +
-  '3. Ver peliculas por titulo\n' +
-  '4. Nada';
+  '1. Ver cartelera 🍿\n' +
+  '2. Ver peliculas por genero 🎭\n' +
+  '3. Ver peliculas por titulo 📀\n' +
+  '4. Suscribirse a un genero 👀\n' +
+  '5. Nada';
 
   useEffect(() => {
     setMessages([
       {
-        text: 'Hola! bienvenido a CineBot.',
+        text: 'Hola! 👋 bienvenido a CineBot 🤖',
         sender: 'bot',
       },
       {
@@ -69,6 +73,25 @@ const ChatPage = () => {
     ]);
   }
 
+  const subscribeOption = async (newMessages) => {
+    setIsSubscribing(true)
+    setIsStartMenu(false)
+    const message = 'A que genero desea subscribirse?\n' +
+                    '1. Accion\n' +
+                    '2. Emocion\n' +
+                    '3. Terror\n' +
+                    '4. Drama\n' +
+                    '5. Comedia';
+    setMessages([
+      ...newMessages,
+      {
+        text: message,
+        sender: 'bot',
+      },
+    ]);
+  }
+
+
   const selectGenderOption = async (newMessages, gender) => {
     setIsSelectingGender(false)
     setIsStartMenu(false)
@@ -92,6 +115,29 @@ const ChatPage = () => {
 
     }catch(err){
       text = 'Ocurrio un error al consultar el genero :('
+      setIsStartMenu(true)
+    }
+    setMessages([
+      ...newMessages,
+      {
+        text: text,
+        sender: 'bot',
+      },
+    ]);
+  }
+
+
+  const selectSubscribeGenderOption = async (newMessages, gender) => {
+    setIsSubscribing(false)
+    setIsStartMenu(false)
+    let text
+    try{
+      await subscribeToGender(Number(localStorage.getItem("userId")),Number(gender))
+      successToast("Suscripción exitosa")
+      text = "Te subscribiste exitosamente al genero, pronto recibiras emails con recomendaciones!"
+    }catch(err){
+      text = 'Ya esta subscripto al genero'
+      setIsStartMenu(true)
     }
     setMessages([
       ...newMessages,
@@ -182,6 +228,11 @@ const ChatPage = () => {
         setInputValue('');
         return
       }
+      if(isSubscribing){
+        await selectSubscribeGenderOption(newMessages, inputValue)
+        setInputValue('');
+        return
+      }
 
       if (inputValue.trim().toLowerCase() === '1' && isStartMenu) {
         await carteleraOption(newMessages)
@@ -199,6 +250,11 @@ const ChatPage = () => {
         return
       }
       if(inputValue.trim().toLowerCase() === '4' && isStartMenu){
+        subscribeOption(newMessages)
+        setInputValue('');
+        return
+      }
+      if(inputValue.trim().toLowerCase() === '5' && isStartMenu){
         setInputValue('');
         setIsStartMenu(false)
         exitOption(newMessages)
