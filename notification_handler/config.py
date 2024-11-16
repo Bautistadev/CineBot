@@ -10,15 +10,16 @@ def initialize_notifications(db):
         generos=[],
     )
 
-    new_genre = Genero(nombre="Accion", usuarios=[new_user])
+    genre = db.query(Genero).filter(Genero.nombre == "Drama").first()
+    genre.usuarios.append(new_user)
     new_movie = Pelicula(
         nombre="The Dark Knight",
-        genero=new_genre,
+        genero=genre,
         director="Christopher Nolan",
         duracion=152,
     )
     db.add(new_user)
-    db.add(new_genre)
+    db.add(genre)
     db.add(new_movie)
     db.commit()
     db.refresh(new_user)

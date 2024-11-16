@@ -3,6 +3,7 @@ from config import initialize_notifications
 from models import Genero, Pelicula
 
 from database import get_session
+import time
 
 
 def send_notifications():
@@ -16,7 +17,7 @@ def send_notifications():
         )
         for usuario in genero_pelicula.usuarios:
             payload = {
-                "chatID": usuario.Telefono,
+                "chatID": int(usuario.Telefono),
                 "movieName": pelicula.nombre,
             }
             response = requests.post(
@@ -25,11 +26,13 @@ def send_notifications():
             if response.status_code != 200:
                 print(f"Failed to send TELEGRAM notification to user {usuario.id}")
 
-            email_response = requests.post(
+            email_response = requests.get(
                 f"http://frontend:3000/api/send-mail?email={usuario.email}&pelicula={pelicula.nombre}"
             )
+            time.sleep(0.1)
             if email_response.status_code != 200:
                 print(f"Failed to send EMAIL notification to user {usuario.id}")
+                print(email_response.text)
 
 
 if __name__ == "__main__":

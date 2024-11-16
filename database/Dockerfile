@@ -9,6 +9,7 @@ ENV MYSQL_PASSWORD=master
 
 # Copia el script SQL al contenedor
 COPY ./cinebotdb.sql /docker-entrypoint-initdb.d/
+COPY ./script_cinebot.sql /docker-entrypoint-initdb.d/
 
 # Exponer el puerto 3306 (el puerto por defecto de MySQL)
 EXPOSE 3306
