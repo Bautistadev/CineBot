@@ -1,0 +1,31 @@
+Ejecución del Programa
+
+El programa se ejecuta desde la terminal. Debes proporcionar argumentos para especificar las acciones a realizar y los parámetros de entrada.
+
+Argumentos Disponibles:
+
+Argumento	Requerido	Descripción
+-j, --json	Sí		Ruta del archivo JSON con la información de las películas.
+-e, --export	No		Exporta los datos como script SQL en un archivo.
+-n, --name	No		Nombre del archivo SQL exportado. Valor por defecto: script_cinebot.sql.
+-s, --save	No		Guarda los datos directamente en la base de datos MySQL.
+-h, --host	No		Dirección del servidor MySQL. Valor por defecto: localhost.
+-p, --port	No		Puerto del servidor MySQL. Valor por defecto: 3306.
+
+Ejemplos de Ejecución
+
+1. Exportar un Script SQL
+Este comando toma un archivo JSON de entrada y genera un script SQL:
+./json2sql -j "peliculas.json" -e
+
+2. Guardar en la Base de Datos
+Guarda los datos directamente en la base de datos MySQL:
+./json2sql -j "peliculas.json" -s
+
+3. Exportar y Guardar al Mismo Tiempo
+Realiza ambas acciones, exportando el script SQL y guardando en la base de datos:
+./json2sql -j "peliculas.json" -e -s
+
+4. Especificar Nombre del Archivo y Host
+Personaliza el nombre del archivo SQL y especifica el host y puerto de la base de datos:
+./json2sql -j "peliculas.json" -e -n "custom_script.sql" -h "192.168.1.100" -p 3307

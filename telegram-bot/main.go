@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"log"
+	"net/http"
 	"os"
 	"os/signal"
 
@@ -11,6 +13,7 @@ import (
 )
 
 var userState = make(map[int64]string)
+var b *bot.Bot
 
 func main() {
 
@@ -22,15 +25,23 @@ func main() {
 		bot.WithDefaultHandler(handler),
 	}
 
-	b, err := bot.New(cfg.TelegramBotToken, opts...)
+	var err error
+	b, err = bot.New(cfg.TelegramBotToken, opts...)
 	if err != nil {
 		panic(err)
 	}
+
+	http.HandleFunc("/sendMovie", sendMovieHandler)
+	go func() {
+		log.Fatal(http.ListenAndServe(":8080", nil))
+	}()
 
 	b.Start(ctx)
 }
 
 func handler(ctx context.Context, b *bot.Bot, update *models.Update) {
+	log.Println("Message received")
+	log.Printf("ChatID: %d", update.Message.Chat.ID)
 	state := getUserState(ctx, b, update)
 	switch state {
 	case "menu":
@@ -120,4 +131,28 @@ func getUserState(ctx context.Context, b *bot.Bot, update *models.Update) string
 	})
 	userState[update.Message.Chat.ID] = "menu"
 	return "menu"
+}
+
+func sendMovieHandler(w http.ResponseWriter, r *http.Request) {
+	var req struct {
+		ChatID    int64  `json:"chatID"`
+		MovieName string `json:"movieName"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, "Invalid request payload", http.StatusBadRequest)
+		return
+	}
+
+	ctx := context.Background()
+
+	msg := "Se ha estrenado una pelicula que le puede interesar: " + req.MovieName
+
+	b.SendMessage(ctx, &bot.SendMessageParams{
+		ChatID: req.ChatID,
+		Text:   msg,
+	})
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Message sent"))
 }

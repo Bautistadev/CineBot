@@ -9,8 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name="usuario")
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Usuario {
 
     /**
@@ -43,6 +42,19 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "Genero_id")
     )
     private List<Genero> generosSuscritos = new ArrayList<>();
+
+    public Usuario(Integer id, String nombre, String apellido, String email, String password, String telefono, List<Genero> generosSuscritos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.password = password;
+        this.telefono = telefono;
+        this.generosSuscritos = generosSuscritos;
+    }
+
+    public Usuario() {
+    }
 
     public Integer getId() {
         return id;
@@ -94,6 +106,14 @@ public class Usuario {
 
     public void suscribir(Genero genero){
         this.generosSuscritos.add(genero);
+    }
+
+    public List<Genero> getGenerosSuscritos() {
+        return generosSuscritos;
+    }
+
+    public void setGenerosSuscritos(List<Genero> generosSuscritos) {
+        this.generosSuscritos = generosSuscritos;
     }
 
     @Override

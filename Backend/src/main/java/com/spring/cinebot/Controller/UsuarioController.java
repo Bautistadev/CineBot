@@ -1,9 +1,12 @@
 package com.spring.cinebot.Controller;
 
+import com.spring.cinebot.DTO.LoginDTO;
+import com.spring.cinebot.DTO.ResponseTokenDTO;
 import com.spring.cinebot.DTO.UsuarioDTO;
 import com.spring.cinebot.DTO.UsuarioRequestDTO;
 import com.spring.cinebot.Service.UsuarioService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +49,13 @@ public class UsuarioController {
     }
 
 
+    @PostMapping("/Login")
+    public ResponseEntity<UsuarioDTO> login(@RequestBody LoginDTO loginDTO) {
 
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(this.usuarioService.generateToken(loginDTO));
+
+    }
 
 }

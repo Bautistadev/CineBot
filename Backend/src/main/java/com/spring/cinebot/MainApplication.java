@@ -1,6 +1,7 @@
 package com.spring.cinebot;
 
 
+import com.spring.cinebot.DTO.LoginDTO;
 import com.spring.cinebot.DTO.PeliculaRequestDTO;
 import com.spring.cinebot.Entity.Cartelera;
 import com.spring.cinebot.Entity.Cine;
@@ -35,7 +36,10 @@ import java.util.stream.Collectors;
 public class MainApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MainApplication.class, args);
+
+		ApplicationContext app = SpringApplication.run(MainApplication.class, args);
+
+
 	}
 
 }
